@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Scheduling System - Registration</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .form-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-reset {
+            background: #95a5a6;
+            margin-left: 1rem;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .success {
+            color: #27ae60;
+            background: #d5f4e6;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn-reset {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Scheduling System</h1>
+            <p>Multi-Engine Add-on Course Registration</p>
+        </header>
+
+        <div class="form-container">
+            <div id="success-message" class="success" style="display: none;">
+                Registration successful! Your student ID is: <span id="student-id"></span>
+            </div>
+
+            <form id="registration-form">
+                <!-- Personal Information Section -->
+                <div class="form-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="first-name">First Name *</label>
+                            <input type="text" id="first-name" name="first_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="middle-name">Middle Name</label>
+                            <input type="text" id="middle-name" name="middle_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name *</label>
+                            <input type="text" id="last-name" name="last_name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address_line1">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="address_city">
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="address_state">
+                        </div>
+                        <div class="form-group">
+                            <label for="postal-code">Postal Code</label>
+                            <input type="text" id="postal-code" name="address_postal_code">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAA Information Section -->
+                <div class="form-section">
+                    <h3>FAA Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="ftn-number">FAA FTN Number *</label>
+                            <input type="text" id="ftn-number" name="faa_ftn_number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="certificate-number">Pilot Certificate Number</label>
+                            <input type="text" id="certificate-number" name="pilot_certificate_number">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="total-flight-time">Total Flight Time (hours)</label>
+                            <input type="number" id="total-flight-time" name="total_flight_time" step="0.1" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="recent-flight-time">Flight Time in Last 12 Months (hours)</label>
+                            <input type="number" id="recent-flight-time" name="flight_time_last_12_months" step="0.1" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Registration Section -->
+                <div class="form-section">
+                    <h3>Course Registration</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="course-start-date">Course Start Date *</label>
+                            <input type="date" id="course-start-date" name="course_start_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="certificate-type">Certificate Adding To *</label>
+                            <select id="certificate-type" name="certificate_adding_to" required>
+                                <option value="">Select certificate type</option>
+                                <option value="Private - ASEL">Private - ASEL</option>
+                                <option value="Commercial - ASEL">Commercial - ASEL</option>
+                                <option value="Multi Engine instructor (MEI) add-on">Multi Engine instructor (MEI) add-on</option>
+                                <option value="Initial ATP Multi Engine">Initial ATP Multi Engine</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Instrument Current? *</label>
+                            <select name="instrument_current" required>
+                                <option value="">Select option</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Complex Aircraft Endorsement? *</label>
+                            <select name="complex_aircraft_endorsement" required>
+                                <option value="">Select option</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Citizenship Proof *</label>
+                        <select name="citizenship_proof" required>
+                            <option value="">Select proof type</option>
+                            <option value="A valid US Passport">A valid US Passport</option>
+                            <option value="State issued birth certificate and a valid photo ID">State issued birth certificate and a valid photo ID</option>
+                            <option value="Not a US Citizen and will need TSA approval">Not a US Citizen and will need TSA approval</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="terms_accepted" required>
+                            I agree to the terms and conditions/liability waiver
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Submit Registration</button>
+                    <button type="reset" class="btn btn-reset">Reset Form</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Convert numeric fields
+            data.total_flight_time = data.total_flight_time ? parseFloat(data.total_flight_time) : 0;
+            data.flight_time_last_12_months = data.flight_time_last_12_months ? parseFloat(data.flight_time_last_12_months) : 0;
+            data.terms_accepted = data.terms_accepted === 'on';
+            
+            try {
+                const response = await fetch('/api/students/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('student-id').textContent = result.studentId;
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('registration-form').reset();
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                } else {
+                    alert('Error: ' + (result.error || 'Registration failed'));
+                }
+            } catch (error) {
+                alert('Network error: Please check if the server is running');
+                console.error('Registration error:', error);
+            }
+        });
+
+        // Set minimum date to today for course start date
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('course-start-date').min = today;
+    </script>
+</body>
+</html>
